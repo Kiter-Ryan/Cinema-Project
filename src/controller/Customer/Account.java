@@ -61,7 +61,6 @@ public class Account {
             checkRegistration();
             if (checkRegistration() == true) {
                     try {
-                        System.out.println("test 1");
                         new CustomerDAO().addCustomer(new Customer(getFirstName(), getLastName(),getMail(),  getUserName(), getPassword()));
                         Parent registrationView = FXMLLoader.load(getClass().getClassLoader().getResource("view/Customer/account.fxml"));
                         Stage stage = new Stage();

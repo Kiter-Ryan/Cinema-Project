@@ -42,12 +42,11 @@ public class EmployeeDAO {
             resultSet = connection.createStatement().executeQuery("SELECT * FROM Employee");
             while(resultSet.next()){
                 employees.add(new Employee(
-                        resultSet.getInt("EmloyeeID"),
                         resultSet.getString("First name"),
                         resultSet.getString("Last name"),
                         resultSet.getString("Mail"),
-                        resultSet.getString("Profil picture")
-                ));
+                        resultSet.getString("Password")
+                        ));
             }
         }catch(SQLException e){
             e.printStackTrace();

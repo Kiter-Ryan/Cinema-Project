@@ -11,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.User;
 import model.UserDAO;
-
-
 import java.io.IOException;
 
 public class Login {
@@ -37,20 +35,20 @@ public class Login {
     }
 
     @FXML
-    public void handleLogin(ActionEvent event) {
+    public void handleLogin(ActionEvent event) throws IOException {
         User user = userDAO.getUser(getUsrName(), getUsrPwd());
         if(user == null){
             errorAlert.setHeaderText("Bad credentials. Please retry.");
             errorAlert.showAndWait();
         }else{
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Connection.class.getResource("/view/Connection/login.fxml"));
-            Parent root = loader.load();
-            Login login = loader.getController();
-            login.setUsrType("Customer");
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(Connection.class.getResource("/view/Connection/login.fxml"));
+                Parent root = loader.load();
+                Login login = loader.getController();
+                login.setUsrType("Customer");
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
         }
     }
 

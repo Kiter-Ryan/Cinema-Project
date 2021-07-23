@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class Movie {
     private static ArrayList<Movie> movies = new ArrayList<>();
     private String title;

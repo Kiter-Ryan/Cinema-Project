@@ -1,10 +1,7 @@
 package model;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDAO {
     public Connection connection;
@@ -15,6 +12,30 @@ public class UserDAO {
     public UserDAO(){
         DataBaseConnection = new DataBaseConnection();
         this.connection = DataBaseConnection.getConnection();
+    }
+
+    public int insertUser(User user, String type){
+        String insertUserQuery = "INSERT INTO USER(UserMail, UserPassword, UserType) VALUES (?,?,?)";
+        PreparedStatement preparedStatement = null;
+        boolean success = false;
+        int userID = 0;
+        try{
+            preparedStatement = connection.prepareStatement(insertUserQuery, Statement.RETURN_GENERATED_KEYS); //take the primary key
+
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, type );
+            preparedStatement.executeUpdate();
+            ResultSet rs =  preparedStatement.getGeneratedKeys();
+            userID = rs.next() ? rs.getInt(1) : 0;
+            preparedStatement.close();
+            System.out.println("Addition of "+user.getUsername()+" into the database...");
+            success = true;
+        }catch(SQLException e ){
+            e.printStackTrace();
+            success = false;
+        }
+        return userID;
 
     }
 
